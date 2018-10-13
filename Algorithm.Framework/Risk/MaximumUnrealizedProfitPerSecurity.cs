@@ -37,7 +37,7 @@ namespace QuantConnect.Algorithm.Framework.Risk
             decimal maximumUnrealizedProfitPercent = 0.05m
             )
         {
-            _maximumUnrealizedProfitPercent = -Math.Abs(maximumUnrealizedProfitPercent);
+            _maximumUnrealizedProfitPercent = Math.Abs(maximumUnrealizedProfitPercent);
         }
 
         /// <summary>
@@ -59,6 +59,7 @@ namespace QuantConnect.Algorithm.Framework.Risk
                 var pnl = security.Holdings.UnrealizedProfitPercent;
                 if (pnl > _maximumUnrealizedProfitPercent)
                 {
+                    Console.WriteLine($"{algorithm.Time}:: TAKE PROFIT");
                     // liquidate
                     yield return new PortfolioTarget(security.Symbol, 0);
                 }

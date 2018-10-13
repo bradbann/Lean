@@ -59,6 +59,7 @@ namespace QuantConnect.Algorithm.Framework.Risk
                 var pnl = security.Holdings.UnrealizedProfitPercent;
                 if (pnl < _maximumDrawdownPercent)
                 {
+                    Console.WriteLine($"{algorithm.Time}:: STOP LOSS");
                     // liquidate
                     yield return new PortfolioTarget(security.Symbol, 0);
                 }
